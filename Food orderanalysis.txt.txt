@@ -1,0 +1,77 @@
+
+Questions will be answering using SQL to help Zomato to increse their Business and find insights from the data.
+
+1* Rating of a hotel plays an important role in terms of performance of the hotel. Hence for a particular location called Basavanagudi ,find out the top 5 high rating hotels in delivery category.
+      
+
+  SELECT
+ name,rating,location,type 
+from zomato 
+where type="Delivery" and location=" Basavanagudi "
+order by 2 
+DESC limit 5
+
+
+2* Find out the top 5 most voted hotels in delivery category.
+    
+
+   SELECT 
+ name,votes,rating
+ from zomato
+ where type="Delivery"
+ order by 2
+ DESC limit 5
+
+
+3* Comapre the Rating of Expensive and Cheapest hotels in Banashankari
+      
+
+   SELECT MIN(rating) AS rating1, MAX(rating) AS rating2
+FROM zomato
+WHERE location = 'Banashankari' AND approx_cost = (SELECT MIN(approx_cost) FROM zomato WHERE location = 'Banashankari')
+OR location = 'Banashankarir' AND approx_cost = (SELECT MAX(approx_cost) FROM zomato WHERE location = 'Banashankari')
+
+4* Online Ordering of the food increased in over time. Find out the total votes of Hotels which provide online service and Non-providing hotels.
+   
+
+ SELECT
+sum(votes) as total_votes,online_order
+FROM zomato
+group by online_order
+ 
+
+
+5* Number of votes defines how much the customers are involved with the service provided by the restaurants For each Restaurant type, find out the number of restaurants, total votes, and average rating. Display the data with the highest votes on the top( if the first row of output is NA display the remaining rows)
+
+  SELECT
+ type,
+COUNT(name) AS number_of_restaurants,
+SUM(votes) AS total_votes,
+AVG(rating) AS avg_rating
+FROM zomato
+where type!='NA'
+GROUP BY type
+ORDER BY CASE WHEN total_votes IS NULL THEN 1 ELSE 0 END, total_votes DESC;
+  
+
+
+6* Find out the most liked dish from most voted hotels in Zomato.
+  
+
+ with cte as (SELECT votes
+FROM zomato
+WHERE online_order = 'Yes' OR type = 'Delivery'
+group by name
+ORDER BY votes DESC
+LIMIT 1)
+
+select name,dish_liked, rating,zomato.votes from cte,zomato
+where zomato.votes=16832
+
+7* To help Zomato in increasing their business, find the top 15 hotels with average votes of 150 and rating greater than 4 ,which provides online service.
+ 
+ SELECT name, votes, rating,online_order
+FROM zomato
+WHERE online_order = 'No' AND votes >= 150 AND rating > 4
+ORDER BY votes DESC
+LIMIT 15
