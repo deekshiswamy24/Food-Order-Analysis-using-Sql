@@ -1,0 +1,2 @@
+# Food Order Analysis using Sql
+ The Food Order Analysis project is aimed at exploring and analyzing food order data to gain valuable insights into customer preferences, order patterns, and restaurant performance. By leveraging SQL, this project will allow us to manipulate, aggregate, and visualize data from various sources to answer critical questions and make data-driven decisions in the food industry.
