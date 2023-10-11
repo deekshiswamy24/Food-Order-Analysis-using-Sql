@@ -9,7 +9,7 @@ Data Cleaning and Preprocessing
 In this project, we performed data cleaning and preprocessing to ensure that the dataset is ready for analysis. Below are the key steps taken:
 
 Removing Unwanted Columns:
-      Identified and removed columns that were not relevant to our analysis. These columns included [list the column names you removed].
+      Identified and removed columns that were not relevant to our analysis.
 
 Renaming Columns:
       Renamed columns to make them more descriptive and consistent. This step improved the readability of the dataset and made it easier to work with.
